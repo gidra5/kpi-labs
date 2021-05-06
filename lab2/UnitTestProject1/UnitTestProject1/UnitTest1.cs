@@ -99,5 +99,50 @@ namespace UnitTestProject1
 
             Assert.AreNotEqual(hash1, hash2);
         }
+
+
+        [TestMethod]
+        public void Test_Hashing_With_Init_0_Or_1_Mod_Throws()
+        {
+            Assert.ThrowsException<System.ArgumentException>(() => PasswordHasher.Init("", 0));
+            Assert.ThrowsException<System.ArgumentException>(() => PasswordHasher.Init("", 1));
+        }
+
+        [TestMethod]
+        public void Test_Hashing_With_Init_Empty_String_Salt_Dont_Change_Hash()
+        {
+            var str = "madlmadlkasd';ol";
+            var salt = "";
+            var hash1 = PasswordHasher.GetHash(str);
+            PasswordHasher.Init(salt, uint.MaxValue);
+            var hash2 = PasswordHasher.GetHash(str);
+
+            Assert.AreEqual(hash1, hash2);
+        }
+
+        [TestMethod]
+        public void Test_Hashing_Equal_Strings_With_Init_Salt_And_Mod_Produces_Equal_Hashes()
+        {
+            var str = "madlmadlkasd';ol";
+            var salt = "kndaslkd'dsd";
+            uint mod = 5321;
+            PasswordHasher.Init(salt, mod);
+            var hash1 = PasswordHasher.GetHash(str);
+            var hash2 = PasswordHasher.GetHash(str);
+
+            Assert.AreEqual(hash1, hash2);
+        }
+
+        [TestMethod]
+        public void Test_Hashing_Equal_Strings_With_Init_Salt_Produces_Equal_Hashes()
+        {
+            var str = "madlmadlkasd';ol";
+            var salt = "kndaslkd'dsd";
+            PasswordHasher.Init(salt, uint.MaxValue);
+            var hash1 = PasswordHasher.GetHash(str);
+            var hash2 = PasswordHasher.GetHash(str);
+
+            Assert.AreEqual(hash1, hash2);
+        }
     }
 }
