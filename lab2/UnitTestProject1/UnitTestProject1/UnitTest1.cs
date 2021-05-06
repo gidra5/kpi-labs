@@ -86,5 +86,18 @@ namespace UnitTestProject1
             Assert.AreNotEqual(hash2, hash3);
             Assert.AreNotEqual(hash1, hash3);
         }
+
+        [TestMethod]
+        public void Test_Hashing_Equal_Strings_Before_And_After_Init_Produces_Different_Hashes()
+        {
+            var str = "madlmadlkasd';ol";
+            var salt = "kndaslkd'dsd";
+            uint mod = 5321;
+            var hash1 = PasswordHasher.GetHash(str);
+            PasswordHasher.Init(salt, mod);
+            var hash2 = PasswordHasher.GetHash(str);
+
+            Assert.AreNotEqual(hash1, hash2);
+        }
     }
 }

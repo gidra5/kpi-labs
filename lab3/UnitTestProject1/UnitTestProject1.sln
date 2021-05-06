@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{DF3C9C08-71FA-4108-AE01-C736E0774682}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IIG.BinaryFlag", "..\IIG.BinaryFlag\IIG.BinaryFlag\IIG.BinaryFlag.csproj", "{31F66863-26A4-4626-9566-BFFFEA52C1A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DF3C9C08-71FA-4108-AE01-C736E0774682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF3C9C08-71FA-4108-AE01-C736E0774682}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF3C9C08-71FA-4108-AE01-C736E0774682}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F66863-26A4-4626-9566-BFFFEA52C1A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F66863-26A4-4626-9566-BFFFEA52C1A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F66863-26A4-4626-9566-BFFFEA52C1A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F66863-26A4-4626-9566-BFFFEA52C1A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
