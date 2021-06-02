@@ -25,21 +25,18 @@ namespace IntegrationTest
 
         int maxIndex(FlagpoleDatabaseUtils database)
         {
-            return database.GetLstBySql(@"SELECT ALL [MultipleBinaryFlagID] FROM[IIG.CoSWE.FlagpoleDB].[dbo].[MultipleBinaryFlags]")
-                .Select(row => Int32.Parse(row[0]))
-                .Aggregate(0, (acc, x) => Math.Max(acc, x));
+            int? maxIndex = database.GetIntBySql(@"SELECT MAX([MultipleBinaryFlagID]) FROM [IIG.CoSWE.FlagpoleDB].[dbo].[MultipleBinaryFlags]");
+            return maxIndex != null ? (int)maxIndex : 0;
         }
 
         void checkFlagPole(FlagpoleDatabaseUtils database, MultipleBinaryFlag bf)
         {
-            int maxIndex = database.GetLstBySql(@"SELECT ALL [MultipleBinaryFlagID] FROM[IIG.CoSWE.FlagpoleDB].[dbo].[MultipleBinaryFlags]")
-                   .Select(row => Int32.Parse(row[0]))
-                   .Aggregate(0, (acc, x) => Math.Max(acc, x));
+            int index = maxIndex(database);
 
             Assert.IsTrue(database.AddFlag(bf.ToString(), (bool)bf.GetFlag()));
-            Assert.IsTrue(database.GetFlag(maxIndex + 1, out string str, out bool? flag));
-            Assert.IsTrue(str == bf.ToString());
-            Assert.IsTrue(flag == bf.GetFlag());
+            Assert.IsTrue(database.GetFlag(index + 1, out string str, out bool? flag));
+            Assert.AreEqual(str, bf.ToString());
+            Assert.AreEqual(flag, bf.GetFlag());
         }
 
         [TestMethod]
@@ -61,7 +58,7 @@ namespace IntegrationTest
         void checkHash(string filepath, string hash)
         {
             Assert.IsTrue(BaseFileWorker.Write(hash, filepath));
-            Assert.IsTrue(BaseFileWorker.ReadAll(filepath) == hash);
+            Assert.AreEqual(BaseFileWorker.ReadAll(filepath), hash);
         }
 
         [TestMethod]
